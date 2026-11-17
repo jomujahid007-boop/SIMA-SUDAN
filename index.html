@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b5847"><meta name="description" content="سِمة — منصة الخدمات السودانية">
-<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/sima-brand.webp"><link rel="apple-touch-icon" href="./assets/sima-brand.webp">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" id="brandFavicon" href="./assets/sima-mark.svg"><link rel="apple-touch-icon" id="brandTouchIcon" href="./assets/sima-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <title>سِمة | SIMA — منصة الخدمات السودانية</title>
 <style>
@@ -25,10 +25,10 @@ footer{padding:40px 0 100px;text-align:center;color:var(--muted);font-size:12px}
 <body>
 <header><div class="wrap">
   <div class="top">
-    <a class="brand" href="./"><img src="./assets/sima-brand.webp" alt="سِمة — الهوية السودانية"><span><strong>سِمة</strong><small>S I M A · SUDAN</small></span></a>
+    <a class="brand" href="./"><img data-brand-image src="./assets/sima-mark.svg" alt="سِمة — الهوية السودانية"><span><strong>سِمة</strong><small>S I M A · SUDAN</small></span></a>
     <div class="actions"><button class="ghost" id="themeBtn">◐ الوضع</button><a class="ghost" id="contactLink" href="#">تواصل معنا</a><a class="ghost" href="./admin.html">لوحة الإدارة</a></div>
   </div>
-  <div class="hero"><img src="./assets/sima-brand.webp" alt="علم السودان وأهرامات السودان — سِمة"></div>
+  <div class="hero"><img data-brand-image src="./assets/sima-hero.svg" alt="علم السودان وأهرامات السودان — سِمة"></div>
 </div></header>
 <main class="wrap">
   <div class="searchbar">
@@ -176,4 +176,5 @@ $('listingForm').onsubmit=async e=>{
 if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 })();
 </script>
+<script src="./brand-image.js" defer></script>
 </body></html>
