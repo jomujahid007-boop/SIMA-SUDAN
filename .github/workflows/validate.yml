@@ -31,3 +31,4 @@ jobs:
         run: |
           node --check /tmp/index.html.js
           node --check /tmp/admin.html.js
+          node --check brand-image.js
