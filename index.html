@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b5847"><meta name="description" content="سِمة — منصة الخدمات السودانية">
-<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/sima-mark.svg"><link rel="apple-touch-icon" href="./assets/sima-mark.svg">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/sima-brand.webp"><link rel="apple-touch-icon" href="./assets/sima-brand.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <title>سِمة | SIMA — منصة الخدمات السودانية</title>
 <style>
 :root{--green:#0b5847;--deep:#073d35;--gold:#e8bd65;--ink:#172923;--muted:#718078;--line:#e3e9e3;--bg:#f7f8f4;--surface:#fff;--soft:#eaf2ed;--shadow:0 12px 32px #123b2a0d}
 body.dark{--ink:#eff6f0;--muted:#a9b8af;--line:#30443a;--bg:#101b16;--surface:#19271f;--soft:#243b2f;--shadow:0 12px 32px #0004}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Alexandria,Tahoma,sans-serif;line-height:1.7}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}
-header{background:linear-gradient(120deg,var(--deep),var(--green));color:#fff;padding:15px 0 23px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{display:flex;align-items:center;gap:12px}.brand img{width:55px;height:55px}.brand strong{display:block;font-size:24px;line-height:1.3}.brand small{display:block;color:#d5e7dd;font-size:11px;letter-spacing:2px}.actions{display:flex;gap:8px;flex-wrap:wrap}.ghost,.primary,.secondary{border:0;border-radius:12px;padding:11px 16px;font-weight:800}.ghost{background:#ffffff18;border:1px solid #ffffff38;color:#fff}.primary{background:var(--gold);color:#273126}.secondary{background:var(--soft);color:var(--green)}
+header{background:linear-gradient(120deg,var(--deep),var(--green));color:#fff;padding:15px 0 23px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{display:flex;align-items:center;gap:12px}.brand img{width:55px;height:55px;object-fit:cover;border-radius:14px;box-shadow:0 4px 14px #001d1840}.brand strong{display:block;font-size:24px;line-height:1.3}.brand small{display:block;color:#d5e7dd;font-size:11px;letter-spacing:2px}.actions{display:flex;gap:8px;flex-wrap:wrap}.ghost,.primary,.secondary{border:0;border-radius:12px;padding:11px 16px;font-weight:800}.ghost{background:#ffffff18;border:1px solid #ffffff38;color:#fff}.primary{background:var(--gold);color:#273126}.secondary{background:var(--soft);color:var(--green)}
 .hero{margin-top:20px;overflow:hidden;border-radius:22px;box-shadow:0 18px 45px #001d1830}.hero img{display:block;width:100%;height:auto;aspect-ratio:2.86/1;object-fit:cover}
 .searchbar{display:grid;grid-template-columns:1.5fr 1fr 1fr auto;gap:9px;margin:20px 0}.searchbar input,.searchbar select,.field input,.field select,.field textarea{width:100%;min-width:0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink)}.searchbar input,.searchbar select{min-height:52px}
 .section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:27px 0 13px}.section-title h2{margin:0;font-size:21px}.muted{color:var(--muted);font-size:12px}
@@ -19,16 +19,16 @@ header{background:linear-gradient(120deg,var(--deep),var(--green));color:#fff;pa
 footer{padding:40px 0 100px;text-align:center;color:var(--muted);font-size:12px}.float-add{position:fixed;bottom:22px;left:22px;z-index:10;border:0;border-radius:30px;padding:14px 22px;background:var(--gold);color:#273126;font-weight:900;box-shadow:0 8px 25px #0003}
 .modal{display:none;position:fixed;inset:0;z-index:30;padding:16px;overflow:auto;background:#061c17bb;backdrop-filter:blur(4px)}.dialog{width:min(600px,100%);margin:22px auto;padding:22px;border-radius:20px;background:var(--surface);box-shadow:0 25px 80px #0005}.dialog h2{margin:0 0 5px}.close{float:left;border:0;border-radius:9px;background:var(--soft);color:var(--ink);padding:8px 12px}.field{margin:12px 0}.field label{display:block;margin-bottom:6px;font-size:12px;font-weight:800}.field textarea{min-height:95px;resize:vertical}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.submit{width:100%;padding:13px;border:0;border-radius:12px;background:var(--green);color:#fff;font-weight:900}.notice{display:none;margin:12px 0;padding:11px;border-radius:10px;background:var(--soft);font-size:12px;white-space:pre-wrap}.notice.error{background:#fff0ed;color:#9d2c1d}.tabs{display:flex;gap:8px;margin:15px 0}.tabs button{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}.tabs button.active{background:var(--green);color:white}.fineprint{font-size:11px;color:var(--muted)}
 @media(max-width:850px){.categories{grid-template-columns:repeat(3,1fr)}.listings{grid-template-columns:repeat(2,1fr)}.searchbar{grid-template-columns:1fr 1fr}.searchbar input{grid-column:1/-1}}
-@media(max-width:560px){.wrap{width:calc(100% - 24px)}.top{align-items:flex-start;flex-wrap:wrap}.brand strong{font-size:20px}.brand img{width:47px;height:47px}.actions{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}.ghost{padding:9px 5px;font-size:11px}.hero{margin-top:13px;border-radius:14px}.hero img{aspect-ratio:1.8/1}.searchbar{grid-template-columns:1fr}.searchbar input{grid-column:auto}.categories{grid-template-columns:repeat(2,1fr)}.listings{grid-template-columns:1fr}.float-add{bottom:15px;left:12px}.form-grid{grid-template-columns:1fr}.dialog{margin:5px auto;padding:17px}}
+@media(max-width:560px){.wrap{width:calc(100% - 24px)}.top{align-items:flex-start;flex-wrap:wrap}.brand strong{font-size:20px}.brand img{width:47px;height:47px;border-radius:12px}.actions{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}.ghost{padding:9px 5px;font-size:11px}.hero{margin-top:13px;border-radius:14px}.hero img{aspect-ratio:1.8/1}.searchbar{grid-template-columns:1fr}.searchbar input{grid-column:auto}.categories{grid-template-columns:repeat(2,1fr)}.listings{grid-template-columns:1fr}.float-add{bottom:15px;left:12px}.form-grid{grid-template-columns:1fr}.dialog{margin:5px auto;padding:17px}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
   <div class="top">
-    <a class="brand" href="./"><img src="./assets/sima-mark.svg" alt="سِمة"><span><strong>سِمة</strong><small>S I M A · SUDAN</small></span></a>
-    <div class="actions"><button class="ghost" id="themeBtn">◐ الوضع</button><button class="ghost" id="accountBtn">دخول / حساب جديد</button><a class="ghost" href="./admin.html">لوحة الإدارة</a></div>
+    <a class="brand" href="./"><img src="./assets/sima-brand.webp" alt="سِمة — الهوية السودانية"><span><strong>سِمة</strong><small>S I M A · SUDAN</small></span></a>
+    <div class="actions"><button class="ghost" id="themeBtn">◐ الوضع</button><a class="ghost" id="contactLink" href="#">تواصل معنا</a><a class="ghost" href="./admin.html">لوحة الإدارة</a></div>
   </div>
-  <div class="hero"><img src="./assets/sima-hero.svg" alt="سِمة — منصة الخدمات السودانية"></div>
+  <div class="hero"><img src="./assets/sima-brand.webp" alt="علم السودان وأهرامات السودان — سِمة"></div>
 </div></header>
 <main class="wrap">
   <div class="searchbar">
@@ -44,16 +44,6 @@ footer{padding:40px 0 100px;text-align:center;color:var(--muted);font-size:12px}
   <footer>سِمة | SIMA — منصة مستقلة للخدمات داخل السودان<br>لا ننصح بدفع أي رسوم إضافية قبل الاتفاق المباشر مع مقدم الخدمة والتحقق منه.</footer>
 </main>
 <button class="float-add" id="addBtn">＋ أضف إعلانك</button>
-
-<div class="modal" id="authModal"><div class="dialog">
-  <button class="close" data-close="authModal">إغلاق ✕</button><h2>حساب سِمة</h2><p class="muted">استخدم رقمك السوداني المحلي دون الحاجة لكتابة مفتاح الدولة.</p>
-  <div class="tabs"><button class="active" data-auth="login">تسجيل الدخول</button><button data-auth="signup">حساب جديد</button></div>
-  <form id="authForm"><div class="field" id="nameField" hidden><label>الاسم الكامل</label><input id="authName" autocomplete="name"></div>
-    <div class="field"><label>رقم الهاتف السوداني</label><input id="authPhone" inputmode="tel" autocomplete="tel" placeholder="09xxxxxxxx" required></div>
-    <div class="field"><label>كلمة المرور</label><input id="authPassword" type="password" minlength="8" autocomplete="current-password" required></div>
-    <button class="submit" id="authSubmit">دخول</button><div class="notice" id="authNotice"></div>
-  </form>
-</div></div>
 
 <div class="modal" id="listingModal"><div class="dialog">
   <button class="close" data-close="listingModal">إغلاق ✕</button><h2>أضف إعلان خدمة</h2><p class="muted">رسوم نشر الإعلان 20,000 جنيه سوداني عبر بنكك. يظهر الإعلان بعد مراجعة التحويل واعتماده.</p>
@@ -86,11 +76,11 @@ footer{padding:40px 0 100px;text-align:center;color:var(--muted);font-size:12px}
 const $ = id => document.getElementById(id);
 const cfg = window.SIMA_CONFIG;
 const db = window.supabase.createClient(cfg.url, cfg.publishableKey);
-let session=null, profile=null, categories=[], cities=[], districts=[], settings=null, listings=[], selectedCategory='';
+let categories=[], cities=[], districts=[], settings=null, listings=[], selectedCategory='';
 const icons = { 'خدمات منزلية':'🏠','تنظيف ومكافحة':'🧹','نقل وشحن':'🚚','سيارات ومركبات':'🚗','مقاولات وبناء':'🏗️','تقنية وتصميم':'💻','تعليم وتدريب':'📚','مناسبات وتنظيم':'🎉','جمال وعناية':'✨','أعمال واستشارات':'📊','صحة ورعاية':'🩺','أخرى':'🧰' };
 const clean = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const phoneE164 = v => { let n=String(v||'').replace(/\D/g,''); if(n.startsWith('249')) n=n.slice(3); if(n.startsWith('0')) n=n.slice(1); return '+249'+n; };
-const phoneLocal = v => { let n=String(v||'').replace(/\D/g,''); if(n.startsWith('249')) n=n.slice(3); if(!n.startsWith('0')) n='0'+n; return n; };
+const phoneDigits = v => String(v||'').replace(/\D/g,'');
+const phoneLocal = v => { let n=phoneDigits(v); if(n.startsWith('249')) n=n.slice(3); if(!n.startsWith('0')) n='0'+n; return n; };
 const notice = (id,msg,error=false) => { const e=$(id); e.style.display='block'; e.className='notice'+(error?' error':''); e.textContent=msg; };
 const hide = id => $(id).style.display='none';
 const open = id => $(id).style.display='block';
@@ -98,20 +88,17 @@ const close = id => $(id).style.display='none';
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>close(b.dataset.close)));
 $('themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('sima-theme',document.body.classList.contains('dark')?'dark':'light');};
 if(localStorage.getItem('sima-theme')==='dark') document.body.classList.add('dark');
-function setAuthMode(mode){ document.querySelectorAll('[data-auth]').forEach(b=>b.classList.toggle('active',b.dataset.auth===mode)); $('nameField').hidden=mode!=='signup'; $('authSubmit').textContent=mode==='signup'?'إنشاء الحساب':'دخول'; $('authPassword').autocomplete=mode==='signup'?'new-password':'current-password'; $('authForm').dataset.mode=mode; }
-document.querySelectorAll('[data-auth]').forEach(b=>b.onclick=()=>setAuthMode(b.dataset.auth));
-$('accountBtn').onclick=()=>{setAuthMode('login');open('authModal');};
 async function loadData(){
   const [catRes,cityRes,distRes,setRes,listingRes] = await Promise.all([
     db.from('categories').select('id,name_ar,name_en,slug,sort_order').eq('is_active',true).order('sort_order'),
     db.from('cities').select('id,state_name_ar,state_name_en,name_ar,name_en,slug').eq('is_active',true).order('sort_order').order('name_ar'),
     db.from('districts').select('id,city_id,name_ar,name_en').eq('is_active',true).order('name_ar'),
-    db.from('site_settings').select('listing_fee,currency,bankak_account_name,bankak_account_number').eq('id',true).maybeSingle(),
+    db.from('site_settings').select('listing_fee,currency,bankak_account_name,bankak_account_number,support_phone').eq('id',true).maybeSingle(),
     db.from('listings').select('id,title,description,contact_name,contact_phone,whatsapp_phone,price_amount,price_type,photos,featured,published_at,categories(id,name_ar),cities(id,name_ar,state_name_ar),districts(name_ar)').eq('status','approved').order('featured',{ascending:false}).order('published_at',{ascending:false}).limit(100)
   ]);
   if(catRes.error) throw catRes.error; if(cityRes.error) throw cityRes.error; if(listingRes.error) throw listingRes.error;
   categories=catRes.data||[]; cities=cityRes.data||[]; districts=distRes.data||[]; settings=setRes.data; listings=listingRes.data||[];
-  renderCategories(); fillLocationSelects(); fillCategorySelect(); renderListings();
+  renderCategories(); fillLocationSelects(); fillCategorySelect(); renderListings(); updateContactLink();
 }
 function fillLocationSelects(){
   const states=[...new Set(cities.map(c=>c.state_name_ar))];
@@ -135,6 +122,12 @@ function renderCategories(){
   $('categories').innerHTML=categories.map(c=>'<button class="category '+(selectedCategory===c.id?'active':'')+'" data-id="'+c.id+'"><span>'+ (icons[c.name_ar]||'✦')+'</span>'+clean(c.name_ar)+'</button>').join('');
   $('categories').querySelectorAll('button').forEach(b=>b.onclick=()=>{selectedCategory=selectedCategory===b.dataset.id?'':b.dataset.id;renderCategories();renderListings();});
 }
+function updateContactLink(){
+  const link=$('contactLink'),digits=phoneDigits(settings?.support_phone);
+  if(digits.length>=9){link.href='https://wa.me/'+(digits.startsWith('249')?digits:'249'+(digits.startsWith('0')?digits.slice(1):digits));link.target='_blank';link.rel='noopener';link.removeAttribute('aria-disabled');}
+  else{link.href='#';link.removeAttribute('target');link.setAttribute('aria-disabled','true');}
+}
+$('contactLink').onclick=e=>{if($('contactLink').getAttribute('aria-disabled')==='true'){e.preventDefault();alert('سيتم تفعيل رقم التواصل قريباً.');}};
 function photoUrl(path){const {data}=db.storage.from('sima-listing-images').getPublicUrl(path);return data.publicUrl;}
 function renderListings(){
   const q=$('search').value.trim().toLowerCase(),state=$('stateFilter').value,city=$('cityFilter').value;
@@ -153,35 +146,7 @@ $('cityFilter').onchange=renderListings;
 $('search').oninput=renderListings;
 $('clearFilters').onclick=()=>{$('search').value='';$('stateFilter').value='';$('cityFilter').value='';selectedCategory='';fillCities();renderCategories();renderListings();};
 $('lState').onchange=fillCities;$('lCity').onchange=fillDistricts;
-async function ensureProfile(user){
-  const {data,error}=await db.from('profiles').select('id,full_name,phone_local,whatsapp_phone').eq('id',user.id).maybeSingle();
-  if(error)throw error;
-  if(data){profile=data;return;}
-  const fullName=user.user_metadata?.full_name||'مستخدم سِمة';
-  const local=phoneLocal(user.phone||'');
-  const created=await db.from('profiles').insert({id:user.id,full_name:fullName,phone_local:local});
-  if(created.error)throw created.error;
-  profile={id:user.id,full_name:fullName,phone_local:local};
-}
-async function handleAuth(e){
-  e.preventDefault();hide('authNotice');const mode=$('authForm').dataset.mode||'login';
-  const phone=phoneE164($('authPhone').value),password=$('authPassword').value;
-  try{
-    let result;
-    if(mode==='signup'){
-      const fullName=$('authName').value.trim();if(fullName.length<2)throw new Error('اكتب الاسم الكامل.');
-      result=await db.auth.signUp({phone,password,options:{data:{full_name:fullName}}});
-      if(result.error)throw result.error;
-      if(result.data.session){session=result.data.session;await ensureProfile(result.data.user);close('authModal');$('accountBtn').textContent='حسابي';}
-      else notice('authNotice','تم إنشاء طلب الحساب. إذا طلب النظام تأكيد رقم الهاتف، أكمل التحقق من رسالة SMS ثم سجّل الدخول. قد يتطلب تفعيل SMS إعداد مزود رسائل في إعدادات المشروع.');
-    }else{
-      result=await db.auth.signInWithPassword({phone,password});
-      if(result.error)throw result.error;session=result.data.session;await ensureProfile(result.data.user);close('authModal');$('accountBtn').textContent='حسابي';
-    }
-  }catch(err){notice('authNotice',err.message||'تعذر إتمام العملية.',true);}
-}
-$('authForm').onsubmit=handleAuth;
-$('addBtn').onclick=()=>{if(!session){open('authModal');return;}showPaymentInfo();open('listingModal');};
+$('addBtn').onclick=()=>{showPaymentInfo();open('listingModal');};
 function showPaymentInfo(){
   const n=settings?.bankak_account_number, name=settings?.bankak_account_name;
   notice('paymentInfo','رسوم الإعلان: 20,000 جنيه سوداني عبر بنكك.\n'+(n?'اسم الحساب: '+name+'\nرقم بنكك: '+n:'سيتم إظهار بيانات بنكك بعد إدخالها من لوحة الإدارة.') );
@@ -190,11 +155,10 @@ async function uploadFile(bucket,path,file){const {error}=await db.storage.from(
 $('listingForm').onsubmit=async e=>{
   e.preventDefault();hide('listingNotice');const btn=$('listingSubmit');btn.disabled=true;btn.textContent='جارٍ إرسال الإعلان...';
   try{
-    if(!session)throw new Error('سجّل الدخول أولاً.');
     const photoFiles=[...$('lPhotos').files].slice(0,5), proof=$('proofFile').files[0], stamp=crypto.randomUUID();
     const photos=[];
-    for(let i=0;i<photoFiles.length;i++) photos.push(await uploadFile('sima-listing-images',session.user.id+'/'+stamp+'-'+i+'.'+photoFiles[i].type.split('/')[1],photoFiles[i]));
-    let proofPath=null;if(proof)proofPath=await uploadFile('sima-payment-proofs',session.user.id+'/'+stamp+'-proof.'+proof.type.split('/')[1],proof);
+    for(let i=0;i<photoFiles.length;i++) photos.push(await uploadFile('sima-listing-images','guest/'+stamp+'-'+i+'.'+photoFiles[i].type.split('/')[1],photoFiles[i]));
+    let proofPath=null;if(proof)proofPath=await uploadFile('sima-payment-proofs','guest/'+stamp+'-proof.'+proof.type.split('/')[1],proof);
     const {data,error}=await db.rpc('submit_listing',{
       p_category_id:$('lCategory').value,p_city_id:$('lCity').value,p_district_id:$('lDistrict').value||null,
       p_title:$('lTitle').value.trim(),p_description:$('lDescription').value.trim(),p_contact_name:$('lContactName').value.trim(),
@@ -208,8 +172,7 @@ $('listingForm').onsubmit=async e=>{
   }catch(err){notice('listingNotice',err.message||'تعذر إرسال الإعلان.',true);}
   finally{btn.disabled=false;btn.textContent='إرسال الإعلان للمراجعة';}
 };
-db.auth.onAuthStateChange((_event,newSession)=>{session=newSession;});
-(async()=>{try{const {data}=await db.auth.getSession();session=data.session;if(session){await ensureProfile(session.user);$('accountBtn').textContent='حسابي';}await loadData();}catch(err){$('listings').innerHTML='<div class="empty">تعذر تحميل البيانات. '+clean(err.message)+'</div>';}})();
+(async()=>{try{await loadData();}catch(err){$('listings').innerHTML='<div class="empty">تعذر تحميل البيانات. '+clean(err.message)+'</div>';}})();
 if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 })();
 </script>
