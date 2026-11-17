@@ -107,7 +107,7 @@ async function loadData(){
     db.from('cities').select('id,state_name_ar,state_name_en,name_ar,name_en,slug').eq('is_active',true).order('state_name_ar').order('name_ar'),
     db.from('districts').select('id,city_id,name_ar,name_en').eq('is_active',true).order('name_ar'),
     db.from('site_settings').select('listing_fee,currency,bankak_account_name,bankak_account_number').eq('id',true).maybeSingle(),
-    db.from('listings').select('id,title,description,contact_name,contact_phone,whatsapp_phone,price_amount,price_type,photos,featured,published_at,categories(name_ar),cities(name_ar,state_name_ar),districts(name_ar)').eq('status','approved').order('featured',{ascending:false}).order('published_at',{ascending:false}).limit(100)
+    db.from('listings').select('id,title,description,contact_name,contact_phone,whatsapp_phone,price_amount,price_type,photos,featured,published_at,categories(id,name_ar),cities(id,name_ar,state_name_ar),districts(name_ar)').eq('status','approved').order('featured',{ascending:false}).order('published_at',{ascending:false}).limit(100)
   ]);
   if(catRes.error) throw catRes.error; if(cityRes.error) throw cityRes.error; if(listingRes.error) throw listingRes.error;
   categories=catRes.data||[]; cities=cityRes.data||[]; districts=distRes.data||[]; settings=setRes.data; listings=listingRes.data||[];
