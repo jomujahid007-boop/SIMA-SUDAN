@@ -1,0 +1,33 @@
+name: Validate SIMA static app
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate manifest and extract inline scripts
+        run: |
+          python3 - <<'PY'
+          import json, re, pathlib
+          json.loads(pathlib.Path('manifest.webmanifest').read_text())
+          for name in ('index.html','admin.html'):
+              html=pathlib.Path(name).read_text()
+              scripts=re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',html,re.S|re.I)
+              inline=[s for s in scripts if s.strip()]
+              if not inline: raise SystemExit(f'No inline JS found in {name}')
+              pathlib.Path('/tmp/'+name+'.js').write_text('\n'.join(inline))
+          cfg=pathlib.Path('sima-config.js').read_text()
+          if 'service_role' in cfg or 'sb_secret_' in cfg: raise SystemExit('Secret key found in public config')
+          print('Manifest valid; inline scripts extracted; public config has no secret key.')
+          PY
+      - name: Check JavaScript syntax
+        run: |
+          node --check /tmp/index.html.js
+          node --check /tmp/admin.html.js
