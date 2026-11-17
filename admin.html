@@ -31,7 +31,7 @@ async function refresh(){
   db.from('listings').select('id,title,description,contact_name,contact_phone,whatsapp_phone,status,featured,created_at,categories(name_ar),cities(name_ar,state_name_ar),districts(name_ar),listing_payments(id,status,amount,transfer_reference,proof_path)').order('created_at',{ascending:false}).limit(200),
   db.from('listing_payments').select('id,listing_id,owner_id,amount,currency,method,transfer_reference,proof_path,status,created_at,listings(title,contact_name,contact_phone)').order('created_at',{ascending:false}).limit(200),
   db.from('cities').select('id,state_name_ar,state_name_en,name_ar,name_en,is_active').order('state_name_ar').order('name_ar'),
-  db.from('site_settings').select('*').eq('id',true).single()
+  db.from('site_settings').select('id,listing_fee,currency,payment_method,bankak_account_name,bankak_account_number,support_phone,updated_at').eq('id',true).single()
  ]);
  for(const x of [l,p,c,s])if(x.error)throw x.error;
  allListings=l.data||[];allPayments=p.data||[];allCities=c.data||[];settings=s.data;
