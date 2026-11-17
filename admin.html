@@ -12,7 +12,7 @@
 <nav class="tabs"><button class="active" data-tab="listings">الإعلانات</button><button data-tab="payments">المدفوعات</button><button data-tab="cities">المدن والمحليات</button><button data-tab="settings">إعدادات بنكك</button></nav>
 <div id="listingsPane"><div id="listingCards" class="cards"></div></div>
 <div id="paymentsPane" class="hidden"><div id="paymentCards" class="cards"></div></div>
-<div id="citiesPane" class="hidden panel"><h3>تفعيل المدن والمحليات</h3><p class="meta">جميع المحليات جاهزة في قاعدة البيانات، لكنها غير مفعلة للظهور حتى تختارها.</p><input id="citySearch" placeholder="ابحث عن ولاية أو مدينة..."><div id="cityRows"></div></div>
+<div id="citiesPane" class="hidden panel"><h3>تفعيل المدن والمحليات</h3><p class="meta">جميع المحليات جاهزة في قاعدة البيانات، لكنها غير مفعلة للظهور حتى تختارها. يمكنك إضافة أحياء كل محلية من زر إدارة الأحياء.</p><input id="citySearch" placeholder="ابحث عن ولاية أو مدينة..."><div id="cityRows"></div><div id="districtManager" class="panel hidden"><h3 id="districtCityTitle">أحياء المدينة</h3><form id="districtForm"><label>اسم الحي بالعربية</label><input id="districtAr" required maxlength="100"><label>اسم الحي بالإنجليزية (اختياري)</label><input id="districtEn" maxlength="100"><button class="btn" style="margin-top:12px">إضافة الحي</button></form><div id="districtRows"></div></div></div>
 <div id="settingsPane" class="hidden panel"><h3>بيانات التحويل عبر بنكك</h3><label>اسم صاحب الحساب</label><input id="bankName"><label>رقم حساب بنكك</label><input id="bankNumber" inputmode="numeric"><label>رقم الدعم</label><input id="supportPhone" inputmode="tel"><button class="btn" id="saveSettings" style="margin-top:14px">حفظ الإعدادات</button></div>
 </div>
 </section>
@@ -21,7 +21,7 @@
 <script>
 (() => {
 const $=id=>document.getElementById(id),db=window.supabase.createClient(window.SIMA_CONFIG.url,window.SIMA_CONFIG.publishableKey);
-let session=null,allListings=[],allPayments=[],allCities=[],settings=null,activeTab='listings';
+let session=null,allListings=[],allPayments=[],allCities=[],settings=null,activeTab='listings',selectedCityId=null;
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function msg(id,text,error=false){const e=$(id);e.style.display='block';e.className='notice'+(error?' error':'');e.textContent=text;}
 function showPane(tab){activeTab=tab;document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));['listings','payments','cities','settings'].forEach(t=>$(t+'Pane').classList.toggle('hidden',t!==tab));}
@@ -52,9 +52,25 @@ function renderPayments(){
  $('paymentCards').querySelectorAll('[data-proof]').forEach(b=>b.onclick=async()=>{const p=allPayments.find(x=>x.id===b.dataset.proof);const {data,error}=await db.storage.from('sima-payment-proofs').createSignedUrl(p.proof_path,120);if(error){msg('mainNotice',error.message,true);return;}window.open(data.signedUrl,'_blank','noopener');});
 }
 function renderCities(){
- const q=$('citySearch').value.toLowerCase();$('cityRows').innerHTML=allCities.filter(c=>(c.name_ar+' '+c.state_name_ar+' '+c.name_en).toLowerCase().includes(q)).map(c=>'<div class="city-row"><div><strong>'+esc(c.name_ar)+'</strong><small>'+esc(c.state_name_ar)+' · '+esc(c.name_en)+'</small></div><label><input type="checkbox" data-city="'+c.id+'" '+(c.is_active?'checked':'')+'> مفعلة</label></div>').join('');
+ const q=$('citySearch').value.toLowerCase();$('cityRows').innerHTML=allCities.filter(c=>(c.name_ar+' '+c.state_name_ar+' '+c.name_en).toLowerCase().includes(q)).map(c=>'<div class="city-row"><div><strong>'+esc(c.name_ar)+'</strong><small>'+esc(c.state_name_ar)+' · '+esc(c.name_en)+'</small></div><div class="row"><button class="btn light" type="button" data-districts="'+c.id+'" data-name="'+esc(c.name_ar)+'">إدارة الأحياء</button><label><input type="checkbox" data-city="'+c.id+'" '+(c.is_active?'checked':'')+'> مفعلة</label></div></div>').join('');
  $('cityRows').querySelectorAll('[data-city]').forEach(ch=>ch.onchange=()=>run(()=>db.from('cities').update({is_active:ch.checked}).eq('id',ch.dataset.city),ch.checked?'تم تفعيل المدينة.':'تم إيقاف المدينة.'));
+ $('cityRows').querySelectorAll('[data-districts]').forEach(b=>b.onclick=()=>openDistricts(b.dataset.districts,b.dataset.name));
 }
+async function openDistricts(cityId,cityName){
+ selectedCityId=cityId;$('districtCityTitle').textContent='أحياء '+cityName;$('districtManager').classList.remove('hidden');await renderDistricts();
+}
+async function renderDistricts(){
+ const {data,error}=await db.from('districts').select('id,name_ar,name_en,is_active').eq('city_id',selectedCityId).order('name_ar');
+ if(error){msg('mainNotice',error.message,true);return;}
+ $('districtRows').innerHTML=(data||[]).map(d=>'<div class="city-row"><div><strong>'+esc(d.name_ar)+'</strong><small>'+esc(d.name_en)+'</small></div><label><input type="checkbox" data-district="'+d.id+'" '+(d.is_active?'checked':'')+'> مفعّل</label></div>').join('')||'<p class="meta">لا توجد أحياء مضافة لهذه المحلية بعد.</p>';
+ $('districtRows').querySelectorAll('[data-district]').forEach(ch=>ch.onchange=async()=>{const {error}=await db.from('districts').update({is_active:ch.checked}).eq('id',ch.dataset.district);if(error)msg('mainNotice',error.message,true);else await renderDistricts();});
+}
+$('districtForm').onsubmit=async e=>{
+ e.preventDefault();const ar=$('districtAr').value.trim(),en=$('districtEn').value.trim()||ar;
+ const {error}=await db.from('districts').insert({city_id:selectedCityId,name_ar:ar,name_en:en,slug:'district-'+crypto.randomUUID(),is_active:false});
+ if(error){msg('mainNotice',error.message,true);return;}
+ $('districtForm').reset();await renderDistricts();msg('mainNotice','تمت إضافة الحي، وهو غير مفعّل حتى تختاره.');
+};
 async function run(fn,success){try{const r=await fn();if(r?.error)throw r.error;msg('mainNotice',success);await refresh();}catch(e){msg('mainNotice',e.message||'تعذر تنفيذ العملية.',true);}}
 $('citySearch').oninput=renderCities;
 $('saveSettings').onclick=()=>run(()=>db.from('site_settings').update({bankak_account_name:$('bankName').value.trim(),bankak_account_number:$('bankNumber').value.trim(),support_phone:$('supportPhone').value.trim(),updated_at:new Date().toISOString()}).eq('id',true),'تم حفظ بيانات بنكك.');
