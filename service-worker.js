@@ -1,4 +1,4 @@
-const CACHE_NAME = "sima-shell-v7";
+const CACHE_NAME = "sima-shell-v8";
 const ROOT = new URL("./", self.registration.scope);
 const SHELL = ["", "index.html", "admin.html", "manifest.webmanifest", "sima-config.js", "assets/sima-mark.svg", "photo-credits.html"].map(p => new URL(p, ROOT).href);
 self.addEventListener("install", event => event.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())));
