@@ -172,8 +172,8 @@ $('clearFilters').onclick=()=>{$('search').value='';$('stateFilter').value='';$(
 $('lState').onchange=fillCities;$('lCity').onchange=fillDistricts;
 $('addBtn').onclick=()=>{showPaymentInfo();open('listingModal');};
 function showPaymentInfo(){
-  const n=settings?.bankak_account_number, name=settings?.bankak_account_name;
-  notice('paymentInfo','رسوم الإعلان: 20,000 جنيه سوداني عبر بنكك.\n'+(n?'اسم الحساب: '+name+'\nرقم بنكك: '+n:'سيتم إظهار بيانات بنكك بعد إدخالها من لوحة الإدارة.') );
+  const n=settings?.bankak_account_number;
+  notice('paymentInfo','رسوم الإعلان: 20,000 جنيه سوداني عبر بنكك.\\n'+(n?'رقم بنكك: '+n:'سيتم إظهار رقم بنكك بعد إدخاله من لوحة الإدارة.') );
 }
 async function uploadFile(bucket,path,file){const {error}=await db.storage.from(bucket).upload(path,file,{upsert:false,contentType:file.type});if(error)throw error;return path;}
 $('listingForm').onsubmit=async e=>{
