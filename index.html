@@ -93,6 +93,7 @@ $('themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.s
 if(localStorage.getItem('sima-theme')==='dark') document.body.classList.add('dark');
 let deferredInstallPrompt=null;
 const installBtn=$('installBtn');
+installBtn.hidden=!!(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||!!navigator.standalone;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;installBtn.hidden=false;});
 window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;installBtn.hidden=true;});
 installBtn.onclick=async()=>{if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;installBtn.hidden=true;return;}const ua=navigator.userAgent||'',ios=/iphone|ipad|ipod/i.test(ua),safari=/safari/i.test(ua)&&!/chrome|crios|android/i.test(ua);$('installInstructions').textContent=ios&&safari?'على iPhone أو iPad: ثبّت سِمة من Safari بهذه الخطوات:':'استخدم قائمة المتصفح لإضافة سِمة إلى الشاشة الرئيسية:';$('installSteps').innerHTML=ios&&safari?'<li>اضغط زر المشاركة أسفل الشاشة.</li><li>اختر «إضافة إلى الشاشة الرئيسية».</li><li>اضغط «إضافة».</li>':'<li>افتح قائمة المتصفح أو المشاركة.</li><li>اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».</li><li>أكد الاختيار.</li>';open('installModal');};
