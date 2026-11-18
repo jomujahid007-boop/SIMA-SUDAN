@@ -46,7 +46,7 @@ footer{padding:40px 0 100px;text-align:center;color:var(--muted);font-size:12px}
 <button class="float-add" id="addBtn">＋ أضف إعلانك</button><div class="modal" id="installModal"><div class="dialog"><button class="close" data-close="installModal">إغلاق ✕</button><h2>ثبّت سِمة على جهازك</h2><p id="installInstructions" class="muted">أضف سِمة إلى الشاشة الرئيسية لتفتح بسرعة مثل التطبيقات.</p><ol id="installSteps"><li>افتح قائمة المشاركة أو خيارات المتصفح.</li><li>اختر «إضافة إلى الشاشة الرئيسية» أو «تثبيت التطبيق».</li><li>اضغط «إضافة» أو «تثبيت».</li></ol></div></div>
 
 <div class="modal" id="listingModal"><div class="dialog">
-  <button class="close" data-close="listingModal">إغلاق ✕</button><h2>أضف إعلان خدمة</h2><p class="muted">رسوم نشر الإعلان 20,000 جنيه سوداني عبر بنكك. يظهر الإعلان بعد مراجعة التحويل واعتماده.</p>
+  <button class="close" data-close="listingModal">إغلاق ✕</button><h2>أضف إعلان خدمة</h2><p class="muted">رسوم نشر الإعلان 20,000 جنيه سوداني عبر بنكك. يظهر الإعلان بعد مراجعة التحويل واعتماده.</p><p class="fineprint" style="padding:10px 12px;border-radius:10px;background:var(--soft);color:var(--green)">تنبيه: يستمر الإعلان لمدة 30 يوماً من تاريخ نشره، ثم يُحذف تلقائياً بعد اكتمال المدة.</p>
   <form id="listingForm">
     <div class="field"><label>عنوان الإعلان</label><input id="lTitle" maxlength="120" required></div>
     <div class="field"><label>وصف الخدمة</label><textarea id="lDescription" maxlength="5000" required></textarea></div>
@@ -115,7 +115,7 @@ async function loadData(){
     db.from('cities').select('id,state_name_ar,state_name_en,name_ar,name_en,slug').eq('is_active',true).order('sort_order').order('name_ar'),
     db.from('districts').select('id,city_id,name_ar,name_en').eq('is_active',true).order('name_ar'),
     db.from('site_settings').select('listing_fee,currency,bankak_account_name,bankak_account_number,support_phone').eq('id',true).maybeSingle(),
-    db.from('listings').select('id,title,description,contact_name,contact_phone,whatsapp_phone,price_amount,price_type,photos,featured,published_at,categories(id,name_ar),cities(id,name_ar,state_name_ar),districts(name_ar)').eq('status','approved').order('featured',{ascending:false}).order('published_at',{ascending:false}).limit(100)
+    db.from('listings').select('id,title,description,contact_name,contact_phone,whatsapp_phone,price_amount,price_type,photos,featured,published_at,expires_at,categories(id,name_ar),cities(id,name_ar,state_name_ar),districts(name_ar)').eq('status','approved').order('featured',{ascending:false}).order('published_at',{ascending:false}).limit(100)
   ]);
   if(catRes.error) throw catRes.error; if(cityRes.error) throw cityRes.error; if(listingRes.error) throw listingRes.error;
   categories=catRes.data||[]; cities=cityRes.data||[]; districts=distRes.data||[]; settings=setRes.data; listings=listingRes.data||[];
