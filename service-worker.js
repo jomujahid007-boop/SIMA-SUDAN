@@ -1,6 +1,6 @@
-const CACHE_NAME = "sima-shell-v5";
+const CACHE_NAME = "sima-shell-v6";
 const ROOT = new URL("./", self.registration.scope);
-const SHELL = ["", "index.html", "admin.html", "manifest.webmanifest", "sima-config.js", "brand-image.js", "assets/sima-brand.webp.b64", "assets/sima-mark.svg", "assets/covers/01-nile-pyramids.svg", "assets/covers/02-nubian-gate.svg", "assets/covers/03-nile-city.svg", "assets/covers/04-sabaloga.svg", "assets/covers/05-hashab.svg", "assets/covers/06-atbara-rail.svg", "assets/covers/07-geometric-textile.svg", "assets/covers/08-begrawiya.svg", "assets/covers/09-sudan-map.svg", "assets/covers/10-modern-sudan.svg"].map(p => new URL(p, ROOT).href);
+const SHELL = ["", "index.html", "admin.html", "manifest.webmanifest", "sima-config.js", "assets/sima-mark.svg", "photo-credits.html"].map(p => new URL(p, ROOT).href);
 self.addEventListener("install", event => event.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith("sima-shell-") && k !== CACHE_NAME).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener("fetch", event => {
