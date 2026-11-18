@@ -80,7 +80,10 @@ let categories=[], cities=[], districts=[], settings=null, listings=[], selected
 const icons = { 'خدمات منزلية':'🏠','تنظيف ومكافحة':'🧹','نقل وشحن':'🚚','سيارات ومركبات':'🚗','مقاولات وبناء':'🏗️','تقنية وتصميم':'💻','تعليم وتدريب':'📚','مناسبات وتنظيم':'🎉','جمال وعناية':'✨','أعمال واستشارات':'📊','صحة ورعاية':'🩺','أخرى':'🧰' };
 const clean = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const phoneDigits = v => String(v||'').replace(/\D/g,'');
-const phoneLocal = v => { let n=phoneDigits(v); if(n.startsWith('249')) n=n.slice(3); if(!n.startsWith('0')) n='0'+n; return n; };
+const phoneLocal = v => { let n=phoneDigits(v); if(n.startsWith('249')) n='0'+n.slice(3); else if(n.length===9 && (n.startsWith('9')||n.startsWith('1'))) n='0'+n; return n; };
+const isSudanPhone = (v,whatsapp=false) => { const n=phoneLocal(v); return whatsapp ? /^09[0-9]{8}$/.test(n) : /^0[19][0-9]{8}$/.test(n); };
+const phoneE164 = v => { let n=phoneDigits(v); if(n.startsWith('249')) return '+'+n; if(n.startsWith('0')) return '+249'+n.slice(1); if(n.length===9 && (n.startsWith('9')||n.startsWith('1'))) return '+249'+n; return ''; };
+const supportE164 = v => { let n=phoneDigits(v); if(n.startsWith('966') && n.length===12) return '+'+n; if(n.startsWith('249') && n.length===12) return '+'+n; if(n.startsWith('05') && n.length===10) return '+966'+n.slice(1); if(n.startsWith('09') && n.length===10) return '+249'+n.slice(1); if(n.startsWith('5') && n.length===9) return '+966'+n; if(n.startsWith('9') && n.length===9) return '+249'+n; return ''; };
 const notice = (id,msg,error=false) => { const e=$(id); e.style.display='block'; e.className='notice'+(error?' error':''); e.textContent=msg; };
 const hide = id => $(id).style.display='none';
 const open = id => $(id).style.display='block';
@@ -123,8 +126,8 @@ function renderCategories(){
   $('categories').querySelectorAll('button').forEach(b=>b.onclick=()=>{selectedCategory=selectedCategory===b.dataset.id?'':b.dataset.id;renderCategories();renderListings();});
 }
 function updateContactLink(){
-  const link=$('contactLink'),digits=phoneDigits(settings?.support_phone);
-  if(digits.length>=9){link.href='https://wa.me/'+(digits.startsWith('249')?digits:'249'+(digits.startsWith('0')?digits.slice(1):digits));link.target='_blank';link.rel='noopener';link.removeAttribute('aria-disabled');}
+  const link=$('contactLink'),digits=supportE164(settings?.support_phone).replace('+','');
+  if(digits){link.href='https://wa.me/'+digits;link.target='_blank';link.rel='noopener';link.removeAttribute('aria-disabled');}
   else{link.href='#';link.removeAttribute('target');link.setAttribute('aria-disabled','true');}
 }
 $('contactLink').onclick=e=>{if($('contactLink').getAttribute('aria-disabled')==='true'){e.preventDefault();alert('سيتم تفعيل رقم التواصل قريباً.');}};
@@ -155,6 +158,8 @@ async function uploadFile(bucket,path,file){const {error}=await db.storage.from(
 $('listingForm').onsubmit=async e=>{
   e.preventDefault();hide('listingNotice');const btn=$('listingSubmit');btn.disabled=true;btn.textContent='جارٍ إرسال الإعلان...';
   try{
+    if(!isSudanPhone($('lContactPhone').value)) throw new Error('رقم التواصل في الإعلان يجب أن يكون سودانياً: 09xxxxxxxx أو 01xxxxxxxx أو بصيغة +249.');
+    if($('lWhatsapp').value.trim() && !isSudanPhone($('lWhatsapp').value,true)) throw new Error('رقم واتساب الإعلان يجب أن يكون سودانياً ويبدأ بـ 09 أو +249.');
     const photoFiles=[...$('lPhotos').files].slice(0,5), proof=$('proofFile').files[0], stamp=crypto.randomUUID();
     const photos=[];
     for(let i=0;i<photoFiles.length;i++) photos.push(await uploadFile('sima-listing-images','guest/'+stamp+'-'+i+'.'+photoFiles[i].type.split('/')[1],photoFiles[i]));
