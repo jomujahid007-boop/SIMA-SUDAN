@@ -11,7 +11,7 @@
 body.dark{--ink:#eff6f0;--muted:#a9b8af;--line:#30443a;--bg:#101b16;--surface:#19271f;--soft:#243b2f;--shadow:0 12px 32px #0004}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Alexandria,Tahoma,sans-serif;line-height:1.7}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}
 header{background:linear-gradient(120deg,var(--deep),var(--green));color:#fff;padding:15px 0 23px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{display:flex;align-items:center;gap:12px}.brand img{width:55px;height:55px;object-fit:cover;border-radius:14px;box-shadow:0 4px 14px #001d1840}.brand strong{display:block;font-size:24px;line-height:1.3}.brand small{display:block;color:#d5e7dd;font-size:11px;letter-spacing:2px}.actions{display:flex;gap:8px;flex-wrap:wrap}.ghost,.primary,.secondary{border:0;border-radius:12px;padding:11px 16px;font-weight:800}.ghost{background:#ffffff18;border:1px solid #ffffff38;color:#fff}.primary{background:var(--gold);color:#273126}.secondary{background:var(--soft);color:var(--green)}
-.hero{margin-top:20px;overflow:hidden;border-radius:22px;box-shadow:0 18px 45px #001d1830}.hero img{display:block;width:100%;height:auto;aspect-ratio:2.86/1;object-fit:cover}
+.hero{margin-top:20px;overflow:hidden;border-radius:22px;box-shadow:0 18px 45px #001d1830}.hero img{display:block;width:100%;height:auto;aspect-ratio:2.86/1;object-fit:cover;background:#073d35;transition:opacity .25s ease}
 .searchbar{display:grid;grid-template-columns:1.5fr 1fr 1fr auto;gap:9px;margin:20px 0}.searchbar input,.searchbar select,.field input,.field select,.field textarea{width:100%;min-width:0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink)}.searchbar input,.searchbar select{min-height:52px}
 .section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:27px 0 13px}.section-title h2{margin:0;font-size:21px}.muted{color:var(--muted);font-size:12px}
 .categories{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.category{padding:13px 8px;border:1px solid var(--line);border-radius:15px;background:var(--surface);color:var(--ink);font-size:13px;font-weight:700;box-shadow:var(--shadow)}.category.active{border:2px solid var(--green);background:var(--soft);color:var(--green)}.category span{display:block;font-size:24px}
@@ -19,16 +19,16 @@ header{background:linear-gradient(120deg,var(--deep),var(--green));color:#fff;pa
 footer{padding:40px 0 100px;text-align:center;color:var(--muted);font-size:12px}.float-add{position:fixed;bottom:22px;left:22px;z-index:10;border:0;border-radius:30px;padding:14px 22px;background:var(--gold);color:#273126;font-weight:900;box-shadow:0 8px 25px #0003}
 .modal{display:none;position:fixed;inset:0;z-index:30;padding:16px;overflow:auto;background:#061c17bb;backdrop-filter:blur(4px)}.dialog{width:min(600px,100%);margin:22px auto;padding:22px;border-radius:20px;background:var(--surface);box-shadow:0 25px 80px #0005}.dialog h2{margin:0 0 5px}.close{float:left;border:0;border-radius:9px;background:var(--soft);color:var(--ink);padding:8px 12px}.field{margin:12px 0}.field label{display:block;margin-bottom:6px;font-size:12px;font-weight:800}.field textarea{min-height:95px;resize:vertical}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.submit{width:100%;padding:13px;border:0;border-radius:12px;background:var(--green);color:#fff;font-weight:900}.notice{display:none;margin:12px 0;padding:11px;border-radius:10px;background:var(--soft);font-size:12px;white-space:pre-wrap}.notice.error{background:#fff0ed;color:#9d2c1d}.tabs{display:flex;gap:8px;margin:15px 0}.tabs button{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}.tabs button.active{background:var(--green);color:white}.fineprint{font-size:11px;color:var(--muted)}
 @media(max-width:850px){.categories{grid-template-columns:repeat(3,1fr)}.listings{grid-template-columns:repeat(2,1fr)}.searchbar{grid-template-columns:1fr 1fr}.searchbar input{grid-column:1/-1}}
-@media(max-width:560px){.wrap{width:calc(100% - 24px)}.top{align-items:flex-start;flex-wrap:wrap}.brand strong{font-size:20px}.brand img{width:47px;height:47px;border-radius:12px}.actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.ghost{padding:9px 5px;font-size:11px}.hero{margin-top:13px;border-radius:14px}.hero img{aspect-ratio:1.8/1}.searchbar{grid-template-columns:1fr}.searchbar input{grid-column:auto}.categories{grid-template-columns:repeat(2,1fr)}.listings{grid-template-columns:1fr}.float-add{bottom:15px;left:12px}.form-grid{grid-template-columns:1fr}.dialog{margin:5px auto;padding:17px}}
+@media(max-width:560px){.wrap{width:calc(100% - 24px)}.top{align-items:flex-start;flex-wrap:wrap}.brand strong{font-size:20px}.brand img{width:47px;height:47px;border-radius:12px}.actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.ghost{padding:9px 5px;font-size:11px}.hero{margin-top:13px;border-radius:14px}.hero img{aspect-ratio:1.8/1;min-height:190px;object-fit:cover}.searchbar{grid-template-columns:1fr}.searchbar input{grid-column:auto}.categories{grid-template-columns:repeat(2,1fr)}.listings{grid-template-columns:1fr}.float-add{bottom:15px;left:12px}.form-grid{grid-template-columns:1fr}.dialog{margin:5px auto;padding:17px}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
   <div class="top">
-    <a class="brand" href="./"><img data-brand-image src="./assets/sima-mark.svg" alt="سِمة — الهوية السودانية"><span><strong>سِمة</strong><small>S I M A · SUDAN</small></span></a>
+    <a class="brand" href="./"><img src="./assets/sima-mark.svg" alt="شعار سِمة — خريطة السودان"><span><strong>سِمة</strong><small>S I M A · SUDAN</small></span></a>
     <div class="actions"><button class="ghost" id="installBtn" hidden>＋ حمّل التطبيق</button><button class="ghost" id="themeBtn">◐ الوضع</button><a class="ghost" id="contactLink" href="#">تواصل معنا</a><a class="ghost" href="./admin.html">لوحة الإدارة</a></div>
   </div>
-  <div class="hero"><img src="./assets/sima-hero.svg" alt="هوية سِمة — السودان"></div>
+  <div class="hero"><img id="seasonalHero" src="./assets/covers/09-sudan-map.svg" alt="هوية سِمة السودانية المتجددة" fetchpriority="high"></div>
 </div></header>
 <main class="wrap">
   <div class="searchbar">
@@ -87,6 +87,9 @@ const supportE164 = v => { let n=phoneDigits(v); if(n.startsWith('966') && n.len
 const notice = (id,msg,error=false) => { const e=$(id); e.style.display='block'; e.className='notice'+(error?' error':''); e.textContent=msg; };
 const hide = id => $(id).style.display='none';
 const open = id => $(id).style.display='block';
+const seasonalCovers = ["01-nile-pyramids","02-nubian-gate","03-nile-city","04-sabaloga","05-hashab","06-atbara-rail","07-geometric-textile","08-begrawiya","09-sudan-map","10-modern-sudan"];
+const heroImage = document.getElementById('seasonalHero');
+if(heroImage){const last=Number(sessionStorage.getItem('sima-cover-index'));let next=Math.floor(Math.random()*seasonalCovers.length);if(seasonalCovers.length>1&&next===last)next=(next+1+Math.floor(Math.random()*(seasonalCovers.length-1)))%seasonalCovers.length;sessionStorage.setItem('sima-cover-index',String(next));heroImage.src='./assets/covers/'+seasonalCovers[next]+'.svg';}
 const close = id => $(id).style.display='none';
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>close(b.dataset.close)));
 $('themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('sima-theme',document.body.classList.contains('dark')?'dark':'light');};
@@ -187,5 +190,5 @@ $('listingForm').onsubmit=async e=>{
 if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 })();
 </script>
-<script src="./brand-image.js" defer></script>
+
 </body></html>
