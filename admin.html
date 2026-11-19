@@ -41,7 +41,7 @@ async function refreshAdminAlerts(initial=false){
  if(!initial&&lastAlertCheck){const fresh=rows.filter(x=>new Date(x.created_at)>new Date(lastAlertCheck));if(fresh.length)playAdminAlert();}
  if(newest)lastAlertCheck=newest;
  const unread=rows.filter(x=>!x.read_at).length;$('adminAlertCount').textContent=String(unread);
- $('adminAlertList').innerHTML=rows.map(x=>'<article class="alert-item '+(!x.read_at?'unread':'')+'"><strong>'+esc(x.title)+'</strong><div>'+esc(x.body)+'</div><small>'+new Date(x.created_at).toLocaleString('ar')}</small></article>').join('')||'<div class="meta">لا توجد تنبيهات جديدة حتى الآن.</div>';
+ $('adminAlertList').innerHTML=rows.map(x=>'<article class="alert-item '+(!x.read_at?'unread':'')+'"><strong>'+esc(x.title)+'</strong><div>'+esc(x.body)+'</div><small>'+new Date(x.created_at).toLocaleString('ar')+'</small></article>').join('')||'<div class="meta">لا توجد تنبيهات جديدة حتى الآن.</div>';
 }
 async function refresh(){
  const [l,p,c,s]=await Promise.all([
