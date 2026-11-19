@@ -35,13 +35,14 @@ function playAdminAlert(){
 $('enableAlertSound').onclick=async()=>{try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw new Error('الصوت غير مدعوم في هذا المتصفح');alertAudio=alertAudio||new AC();await alertAudio.resume();alertSoundEnabled=true;$('alertSoundState').textContent='الصوت مفعّل';$('enableAlertSound').textContent='🔔 اختبار الرنة';playAdminAlert();}catch(e){$('alertSoundState').textContent='تعذر تفعيل الصوت';}};
 async function refreshAdminAlerts(initial=false){
  if(!session)return;
- const q=db.from('notifications').select('id,title,body,kind,read_at,created_at').eq('kind','admin_new_listing').order('created_at',{ascending:false}).limit(30);
+ const q=db.from('notifications').select('id,title,body,kind,read_at,created_at').eq('kind','admin_new_listing').is('read_at',null).order('created_at',{ascending:false}).limit(30);
  const {data,error}=await q;if(error){$('adminAlertList').innerHTML='<div class="meta">تعذر تحميل التنبيهات.</div>';return;}
  const rows=data||[];const newest=rows[0]?.created_at||null;
  if(!initial&&lastAlertCheck){const fresh=rows.filter(x=>new Date(x.created_at)>new Date(lastAlertCheck));if(fresh.length)playAdminAlert();}
  if(newest)lastAlertCheck=newest;
  const unread=rows.filter(x=>!x.read_at).length;$('adminAlertCount').textContent=String(unread);
- $('adminAlertList').innerHTML=rows.map(x=>'<article class="alert-item '+(!x.read_at?'unread':'')+'"><strong>'+esc(x.title)+'</strong><div>'+esc(x.body)+'</div><small>'+new Date(x.created_at).toLocaleString('ar')+'</small></article>').join('')||'<div class="meta">لا توجد تنبيهات جديدة حتى الآن.</div>';
+ $('adminAlertList').innerHTML=rows.map(x=>'<article class="alert-item unread" role="button" tabindex="0" data-dismiss-alert="'+x.id+'" title="اضغط لإخفاء التنبيه"><strong>'+esc(x.title)+'</strong><div>'+esc(x.body)+'</div><small>'+new Date(x.created_at).toLocaleString('ar')+' · اضغط لإخفاء التنبيه</small></article>').join('')||'<div class="meta">لا توجد تنبيهات جديدة حتى الآن.</div>';
+ $('adminAlertList').querySelectorAll('[data-dismiss-alert]').forEach(item=>{const dismiss=async()=>{item.style.opacity='.45';item.style.pointerEvents='none';const {error}=await db.from('notifications').update({read_at:new Date().toISOString()}).eq('id',item.dataset.dismissAlert).is('read_at',null);if(error){item.style.opacity='';item.style.pointerEvents='';msg('mainNotice','تعذر إخفاء التنبيه: '+error.message,true);return;}await refreshAdminAlerts(false);};item.onclick=dismiss;item.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();dismiss();}};});
 }
 async function refresh(){
  const [l,p,c,s]=await Promise.all([
