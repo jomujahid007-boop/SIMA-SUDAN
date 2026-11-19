@@ -151,7 +151,7 @@ function renderCategories(){
 }
 function updateContactLink(){
   const link=$('contactLink'),digits=supportE164(settings?.support_phone).replace('+','');
-  if(digits){const message='السلام عليكم ورحمة الله وبركاته، لدي استفسار بخصوص منصة سِمة. هل يمكنكم مساعدتي؟';link.href='https://wa.me/'+digits+'?text='+encodeURIComponent(message);link.target='_blank';link.rel='noopener';link.removeAttribute('aria-disabled');}
+  if(digits){const message='السلام عليكم ورحمة الله وبركاته، لدي استفسار بخصوص منصة سِمة. هل يمكنكم مساعدتي؟\\n\\nSIMA_SUPPORT_REQUEST';link.href='https://wa.me/'+digits+'?text='+encodeURIComponent(message);link.target='_blank';link.rel='noopener';link.removeAttribute('aria-disabled');}
   else{link.href='#';link.removeAttribute('target');link.setAttribute('aria-disabled','true');}
 }
 $('contactLink').onclick=e=>{if($('contactLink').getAttribute('aria-disabled')==='true'){e.preventDefault();alert('سيتم تفعيل رقم التواصل قريباً.');}};
