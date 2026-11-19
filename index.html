@@ -82,6 +82,27 @@ footer{padding:40px 0 100px;text-align:center;color:var(--muted);font-size:12px}
 const $ = id => document.getElementById(id);
 const cfg = window.SIMA_CONFIG;
 const db = window.supabase.createClient(cfg.url, cfg.publishableKey);
+
+// Count one unique browser per device/browser profile; no names, phone numbers, or IP addresses are collected.
+function getSimaVisitorKey(){
+  const storageKey='sima-visitor-id-v1';
+  try{
+    let key=localStorage.getItem(storageKey);
+    if(key)return key;
+    const bytes=new Uint8Array(16);crypto.getRandomValues(bytes);
+    bytes[6]=(bytes[6]&15)|64;bytes[8]=(bytes[8]&63)|128;
+    const hex=[...bytes].map(x=>x.toString(16).padStart(2,'0')).join('');
+    key=hex.slice(0,8)+'-'+hex.slice(8,12)+'-'+hex.slice(12,16)+'-'+hex.slice(16,20)+'-'+hex.slice(20);
+    localStorage.setItem(storageKey,key);
+    return key;
+  }catch(e){return null;}
+}
+const simaVisitorKey=getSimaVisitorKey();
+if(simaVisitorKey){
+  db.rpc('sima_track_visit',{p_visitor_key:simaVisitorKey})
+    .then(({error})=>{if(error)console.warn('SIMA visitor tracking unavailable:',error.message);})
+    .catch(()=>{});
+}
 let categories=[], cities=[], districts=[], settings=null, listings=[], selectedCategory='';
 const icons = { 'خدمات منزلية':'🏠','تنظيف ومكافحة':'🧹','نقل وشحن':'🚚','توصيل مشاوير':'🚕','الدلالة':'🤝','مقاولات وبناء':'🏗️','تقنية وتصميم':'💻','تعليم وتدريب':'📚','مناسبات وتنظيم':'🎉','جمال وعناية':'✨','أعمال واستشارات':'📊','صحة ورعاية':'🩺','أخرى':'🧰' };
 const clean = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
